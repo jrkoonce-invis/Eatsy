@@ -1,9 +1,6 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity, TouchableWithoutFeedback} from "react-native";
-import { Link } from "expo-router";
-import { React, useState, useRef } from "react";
-import { TextInput } from 'react-native';
-
-import MenuItemCard from "../../components/MenuItemCard";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity, TouchableWithoutFeedback, TextInput } from "react-native";
+import RestaurantCard from "../../components/RestaurantCard";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -12,49 +9,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
-
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 350,
-    marginHorizontal: "auto",
-    marginBottom: 40,
-    marginTop: 40,
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-  link: {
-    textDecorationLine: "underline", 
-  },
-  cardContainer: {
-    flex: 1,
-    gap: 15,
-    alignItems: "center",
-    marginTop: 100,
-    marginBottom: 100,
-  },
-  card: {
-    backgroundColor: "white",
-    width: windowWidth * .85,
-    height: 150,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "black",
-    shadowColor: 'black',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-  },
-  cardText: {
-    fontSize: 20,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -105,14 +59,72 @@ const styles = StyleSheet.create({
   },
 });
 
-let foods = ["Burger", "Sammy", "Cookie", "Coffee", "Housekeys", "Peanuts"]
-let cards = [];
-foods.forEach((food, index) => {
-  cards.push(
-    // <MenuItemCard name="Bacon Burger" rating="4.5" restaurant="Wendy's" photo="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.allrecipes.com%2Fwendys-pretzel-baconator-launch-8404167&psig=AOvVaw1rQWDpu3zchWqURMPf7HSR&ust=1713900433927000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPiNyc3H1oUDFQAAAAAdAAAAABAE" description="A half-pound* of fresh British beef, American cheese, 6 pieces of crispy Applewood smoked bacon, Heinz ketchup, and Heinz mayo. Carnivores rejoice!"></MenuItemCard>
-    <MenuItemCard key={index} photo={""} rating={Math.floor(Math.random(5)*5)} name={food} price = "$9.50" restaurant={"Wendy's"}></MenuItemCard>
-  );
-});
+const restaurants = [
+  {
+    name: "Wendy's",
+    cuisine: "Fastfood: Burgers, fries, and drinks",
+    photo: "", 
+    rating: 4,
+    price: "$",
+    description: "A fast food restaurant known for its quick and easy eats.",
+  },
+  {
+    name: "Subway",
+    cuisine: "Sandwiches",
+    photo: "", 
+    rating: 4,
+    price: "$",
+    description: "A fast food restaurant known for its submarine sandwiches and salads.",
+  },
+  {
+    name: "McDonald's",
+    cuisine: "Fast Food",
+    photo: "", 
+    rating: 3,
+    price: "$",
+    description: "A global fast food chain known for its hamburgers, fries, and chicken products.",
+  },
+  {
+    name: "Jimmy John's",
+    cuisine: "Sandwiches",
+    photo: "", 
+    rating: 4,
+    price: "$",
+    description: "A sandwich shop offering gourmet sandwiches and subs made with high-quality ingredients.",
+  },
+  {
+    name: "Raising Cane's",
+    cuisine: "Chicken Fingers",
+    photo: "", 
+    rating: 4,
+    price: "$",
+    description: "A fast food restaurant known for its fresh, never frozen chicken fingers and signature sauce.",
+  },
+  {
+    name: "Domino's",
+    cuisine: "Pizza",
+    photo: "", 
+    rating: 4,
+    price: "$",
+    description: "A pizza delivery chain known for its wide selection of pizzas, pasta, and other Italian-American dishes.",
+  },
+  {
+    name: "Papa John's",
+    cuisine: "Pizza",
+    photo: "", 
+    rating: 3,
+    price: "$",
+    description: "A pizza delivery chain offering a variety of pizzas, sides, and desserts.",
+  },
+  {
+    name: "Insomnia Cookies",
+    cuisine: "Desserts",
+    photo: "", 
+    rating: 4,
+    price: "$", 
+    description: "A dessert shop specializing in warm cookies, brownies, and ice cream sandwiches.",
+  },
+];
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -122,16 +134,26 @@ export default function Page() {
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
   };
+
   const dismissDropdown = () => {
     setDropdownVisible(false);
   };
-  const dropdownRef = useRef(null);
+
   const handleSearchBarPress = () => {
-    toggleDropdown()
-  }
+    toggleDropdown();
+  };
+
   const handlePressOutsideDropdown = () => {
     setDropdownVisible(false);
   };
+
+  let r_cards = [];
+  restaurants.forEach((r, index) => {
+    r_cards.push(
+      <RestaurantCard key={index} photo={""} rating={Math.floor(Math.random(5)*5)} price="price" restaurant={r} />
+    );
+  });
+
   return (
     <TouchableWithoutFeedback onPress={handlePressOutsideDropdown}>
       <View style={styles.container}>
@@ -161,10 +183,9 @@ export default function Page() {
           style={{ flex: 1 }}
           contentContainerStyle={{ flexGrow: 1, alignItems: 'center', gap: 15, marginTop: 100, marginBottom: 100 }}
         >
-          {cards}
+          {r_cards}
         </ScrollView>
       </View>
     </TouchableWithoutFeedback>
   );
 }
-

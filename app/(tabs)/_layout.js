@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faHouse, faGear } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faGear, faUtensils } from '@fortawesome/free-solid-svg-icons'
 
 export default function TabLayout() {
   return (
@@ -12,6 +12,14 @@ export default function TabLayout() {
           title: 'Home',
           tabBarShowLabel: false,
           tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHouse} size={28} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="restaurants"
+        options={{
+          title: 'Restaurants',
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faUtensils} size={28} color={color} />,
         }}
       />
       <Tabs.Screen
