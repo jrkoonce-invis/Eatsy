@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     position: 'absolute',
-    top: 50,
+    top: 0,
+    paddingTop: 60,
     left: 0,
     right: 0,
     zIndex: 1,
@@ -159,7 +160,7 @@ export default function Page() {
         </View>
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1, alignItems: 'center', gap: 15, marginTop: 100, marginBottom: 100 }}
+          contentContainerStyle={{ flexGrow: 1, alignItems: 'center', gap: 15, paddingBottom: 50, paddingTop: 150 }}
         >
           {cards}
         </ScrollView>

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
 import { Switch, Button } from 'react-native-paper';
+import { Link } from "expo-router";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -18,11 +18,17 @@ export default function Page() {
       </View>
       <View style={styles.settingsRow}>
         <Text style={styles.settingsText}>Dark Mode</Text>
-        <Switch style={{paddingRight: 10}} color="maroon" value={isSwitchOn} onValueChange={onToggleSwitch} />
+        <Switch color="maroon" value={isSwitchOn} onValueChange={onToggleSwitch} />
       </View>
       <View style={styles.settingsRow}>
         <Text style={styles.settingsText}>View Favorites</Text>
         <Button textColor="maroon" mode="outlined">Saved</Button>
+      </View>
+      <View style={styles.settingsRow}>
+        <Text style={styles.settingsText}>Log In</Text>
+        <Link href="/login">
+          <Button textColor="maroon" mode="outlined">Log In</Button>
+        </Link>
       </View>
       <View style={styles.settingsRow}>
         <Text style={styles.settingsText}>Log Out</Text>

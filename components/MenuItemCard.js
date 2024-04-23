@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import { Link } from "expo-router";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { faStarOutline } from '@fortawesome/free-regular-svg-icons/faStar'
+import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons/faStar'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -18,7 +18,7 @@ const MenuItemCard = ({name, photo, restaurant, rating, price, description}) => 
     }
     for (let i = 0; i < 5 - rating; i++) {
         stars.push(
-          <FontAwesomeIcon key={i} icon={faStarOutline}  size={14} color="maroon" />
+          <FontAwesomeIcon key={5 - i} icon={faStarOutline}  size={14} color="maroon" />
           );
       }
 

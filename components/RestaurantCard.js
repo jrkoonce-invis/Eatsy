@@ -16,7 +16,7 @@ const RestaurantCard = ({ restaurant }) => {
     }
     for (let i = 0; i < 5 - restaurant.rating; i++) {
         stars.push(
-          <FontAwesomeIcon key={i} icon={faStarOutline}  size={14} color="gold" />
+          <FontAwesomeIcon key={5-i} icon={faStarOutline}  size={14} color="gold" />
           );
       }
     return (
@@ -43,14 +43,15 @@ const styles = StyleSheet.create({
         flexDirection:"row"
     },
     cardImage: {
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
         borderRadius: 10,
+        paddingLeft: 10,
     },
     card: {
         backgroundColor: "white",
         width: windowWidth * .9,
-        height: 150,
+        height: 200,
         borderRadius: 20,
         shadowColor: "black",
         shadowOffset: {width: -2, height: 4},
@@ -58,9 +59,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         flexDirection: "row",
         alignItems: "center",
-        paddingLeft: 15,
-        paddingHorizontal: 20,
-        paddingVertical: 15,
+        paddingLeft: 15
       },
       cardText: {
         fontSize: 20,
@@ -75,6 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 15,
         marginRight: 10,
+        gap: 5,
       }
       
 });
