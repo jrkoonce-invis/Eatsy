@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Link } from "expo-router";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,18 @@ import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
 const windowWidth = Dimensions.get('window').width;
 
 const RestaurantCard = ({ restaurant }) => {
+    let stars = []
+    for (let i = 0; i < restaurant.rating; i++) {
+      stars.push(
+        <FontAwesomeIcon key={i} icon={faStar} size={14} color="gold" />
+        );
+    }
+    for (let i = 0; i < 5 - restaurant.rating; i++) {
+        stars.push(
+          <FontAwesomeIcon key={i} icon={faStarOutline}  size={14} color="gold" />
+          );
+      }
     return (
-        <ScrollView contentContainerStyle={styles.scrollView}>
             <Link href={{
                 pathname: "/modal",
                 params: { name: restaurant.name },
@@ -21,22 +31,16 @@ const RestaurantCard = ({ restaurant }) => {
                         <Text style={styles.cardSubText}>Cuisine: {restaurant.cuisine}</Text>
                         <Text style={styles.cardSubText}>{restaurant.description}</Text>
                         <Text style={styles.cardSubText}>Price: {restaurant.price}</Text>
-                        <View style={styles.rating}>
-                            {Array.from({ length: 5 }, (_, i) => (
-                                <FontAwesomeIcon key={i} icon={i < restaurant.rating ? faStar : faStarOutline} size={14} color="gold" />
-                            ))}
-                        </View>
+                        <Text style= {styles.rating}>{stars}</Text>
                     </View>
                 </View>
             </Link>
-        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    scrollView: {
-        alignItems: 'center',
-        paddingVertical: 15,
+    rating: {
+        flexDirection:"row"
     },
     cardImage: {
         width: 100,
@@ -45,35 +49,34 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: "white",
-        width: windowWidth * 0.9,
+        width: windowWidth * .9,
+        height: 150,
         borderRadius: 20,
         shadowColor: "black",
-        shadowOffset: { width: -2, height: 4 },
+        shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.05,
         shadowRadius: 2,
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 20,
+        paddingLeft: 15,
         paddingHorizontal: 20,
         paddingVertical: 15,
-    },
-    cardText: {
+      },
+      cardText: {
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 5,
-    },
-    cardSubText: {
+      },
+      cardSubText: {
         fontSize: 14,
         color: "#666",
-    },
-    cardTextContainer: {
+      },
+      cardTextContainer: {
         flex: 1,
         marginLeft: 15,
         marginRight: 10,
-    },
-    rating: {
-        flexDirection: "row",
-    },
+      }
+      
 });
 
 export default RestaurantCard;
